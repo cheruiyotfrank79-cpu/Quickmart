@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quickmart Job Application - Careers at Quickmart Kenya</title>
+    <style>
+        /* ===================================
+           GLOBAL RESET & BASE STYLES
+        =================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ===================================
+           QUICKMART BRAND COLORS
+        =================================== */
+        :root {
+            --quickmart-red: #d60000;
+            --quickmart-green: #008736;
+            --quickmart-white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --border-color: #ddd;
+            --success-green: #28a745;
+            --error-red: #dc3545;
+        }
+
+        /* ===================================
+           NAVIGATION BAR (QUICKMART STYLE)
+        =================================== */
+        .navbar {
+            background-color: var(--quickmart-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--quickmart-red);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--quickmart-red);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover {
+            color: var(--quickmart-red);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--quickmart-red);
+            transition: 0.3s;
+        }
+
+        /* ===================================
+           BACK BUTTON (QUICKMART STYLE)
+        =================================== */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid var(--quickmart-red);
+            color: var(--quickmart-red);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: var(--quickmart-red);
+            color: white;
+        }
+
+        .back-arrow {
+            font-size: 1.2rem;
+        }
+
+        /* ===================================
+           PAGE CONTAINER
+        =================================== */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+            min-height: calc(100vh - 200px);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ===================================
+           HERO SECTION (HOME PAGE)
+        =================================== */
+        .hero {
+            background: linear-gradient(135deg, var(--quickmart-red), var(--quickmart-green));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background-color: var(--quickmart-white);
+            color: var(--quickmart-red);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===================================
+           CARDS & CONTENT SECTIONS
+        =================================== */
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            color: var(--quickmart-red);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--quickmart-green);
+            padding-bottom: 10px;
+        }
+
+        .card h3 {
+            color: var(--quickmart-green);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p, .card ul {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .card ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===================================
+           FORM STYLES
+        =================================== */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--quickmart-green);
+        }
+
+        .form-group input.valid {
+            border-color: var(--success-green);
+        }
+
+        .form-group input.invalid {
+            border-color: var(--error-red);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .required {
+            color: var(--quickmart-red);
+        }
+
+        /* ===================================
+           BUTTONS
+        =================================== */
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background-color: var(--quickmart-green);
+            color: white;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background-color: #006628;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 135, 54, 0.3);
+        }
+
+        .btn-submit:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-next {
+            background-color: var(--quickmart-red);
+            color: white;
+        }
+
+        .btn-next:hover {
+            background-color: #b00000;
+        }
+
+        .btn-prev {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-prev:hover {
+            background-color: #545b62;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* ===================================
+           PROGRESS INDICATOR
+        =================================== */
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--quickmart-red), var(--quickmart-green));
+            transition: width 0.5s;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .step-indicators {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 60px;
+            text-align: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .step.active {
+            background-color: var(--quickmart-red);
+            color: white;
+            font-weight: bold;
+        }
+
+        .step.completed {
+            background-color: var(--quickmart-green);
+            color: white;
+        }
+
+        /* ===================================
+           REQUIREMENTS LIST
+        =================================== */
+        .requirements-list {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--quickmart-green);
+        }
+
+        .requirements-list h3 {
+            color: var(--quickmart-red);
+            margin-bottom: 1rem;
+        }
+
+        .requirements-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .requirements-list li::before {
+            content: "✓";
+            color: var(--quickmart-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* ===================================
+           SUCCESS MESSAGE
+        =================================== */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-modal.show {
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+
+        .success-content {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            margin: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success-green);
+            margin-bottom: 1rem;
+        }
+
+        .success-content h2 {
+            color: var(--quickmart-green);
+            margin-bottom: 1rem;
+        }
+
+        .success-content p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* ===================================
+           FOOTER
+        =================================== */
+        .footer {
+            background-color: var(--quickmart-red);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===================================
+           MOBILE RESPONSIVE
+        =================================== */
+        @media (max-width: 768px) {
+            .navbar-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                gap: 1rem;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .step {
+                font-size: 0.75rem;
+                padding: 8px;
+            }
+
+            .brand-name {
+                font-size: 1.3rem;
+            }
+
+            .logo {
+                height: 40px;
+            }
+        }
+
+        /* ===================================
+           GRID LAYOUTS
+        =================================== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--quickmart-red);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h4 {
+            color: var(--quickmart-green);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===================================
+           REVIEW SECTION
+        =================================== */
+        .review-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .review-label {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .review-value {
+            color: var(--text-light);
+        }
+
+        /* ===================================
+           CHECKBOX & RADIO STYLES
+        =================================== */
+        .checkbox-group {
+            margin: 1rem 0;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-top: 4px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* ===================================
+           POSITIONS GRID
+        =================================== */
+        .positions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .position-card {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .position-card:hover {
+            border-color: var(--quickmart-red);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .position-card.selected {
+            border-color: var(--quickmart-green);
+            background-color: #e8f5e9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===================================
+         NAVIGATION BAR
+    =================================== -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container" onclick="navigateTo('home')">
+                <img src="quickmart.png" alt="Quickmart Logo" class="logo">
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a onclick="navigateTo('home')">Home</a></li>
+                <li><a onclick="navigateTo('about')">About Us</a></li>
+                <li><a onclick="navigateTo('privacy')">Privacy</a></li>
+                <li><a onclick="navigateTo('terms')">Terms</a></li>
+                <li><a onclick="navigateTo('contact')">Contact</a></li>
+                <li><a onclick="navigateTo('cookies')">Cookie Policy</a></li>
+                <li><a onclick="navigateTo('job-application')">Job Application</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================================
+         HOME PAGE
+    =================================== -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>Join the Quickmart Family</h1>
+            <p>Build Your Career with Kenya's Leading Supermarket Chain</p>
+            <button class="btn-primary" onclick="navigateTo('job-application')">Apply Now</button>
+        </div>
+        
+        <div class="container">
+            <div class="card">
+                <h2>Why Work at Quickmart?</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>🌟 Career Growth</h4>
+                        <p>We invest in our employees through continuous training and development programs.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>💰 Competitive Benefits</h4>
+                        <p>Enjoy competitive salaries, health insurance, and performance bonuses.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🤝 Team Culture</h4>
+                        <p>Be part of a supportive team that values collaboration and excellence.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🎯 Work-Life Balance</h4>
+                        <p>We believe in maintaining a healthy balance between work and personal life.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Available Positions</h2>
+                <ul>
+                    <li>Cashier</li>
+                    <li>Sales Assistant</li>
+                    <li>Stock Controller</li>
+                    <li>Supervisor</li>
+                    <li>Customer Service Representative</li>
+                    <li>Security Officer</li>
+                    <li>Cleaner</li>
+                    <li>Butchery Attendant</li>
+                </ul>
+                <button class="btn-primary" onclick="navigateTo('job-application')" style="margin-top: 1rem;">View All Openings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         ABOUT US PAGE
+    =================================== -->
+    <div id="about" class="page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>About Quickmart Kenya</h2>
+                <p>Quickmart is one of Kenya's fastest-growing supermarket chains, committed to providing quality products and exceptional customer service across the nation.</p>
+                
+                <h3>Our Mission</h3>
+                <p>To be Kenya's preferred retail destination by offering quality products, excellent customer service, and competitive prices while creating employment opportunities for Kenyans.</p>
+                
+                <h3>Our Vision</h3>
+                <p>To become the leading supermarket chain in East Africa, known for innovation, customer satisfaction, and community impact.</p>
+                
+                <h3>Our Values</h3>
+                <ul>
+                    <li>Integrity in all our dealings</li>
+                    <li>Excellence in service delivery</li>
+                    <li>Customer-first approach</li>
+                    <li>Teamwork and collaboration</li>
+                    <li>Innovation and continuous improvement</li>
+                    <li>Community responsibility</li>
+                </ul>
+                
+                <h3>Our Presence</h3>
+                <p>With over 50 branches across Kenya, Quickmart serves thousands of customers daily and employs over 3,000 Kenyans. We continue to expand our footprint to serve more communities.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         PRIVACY POLICY PAGE
+    =================================== -->
+    <div id="privacy" class="page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Privacy Policy</h2>
+                <p><strong>Last Updated: November 2025</strong></p>
+                
+                <h3>1. Information Collection</h3>
+                <p>Quickmart Kenya collects personal information during the job application process, including:</p>
+                <ul>
+                    <li>Full name and contact details</li>
+                    <li>National ID number</li>
+                    <li>Educational qualifications</li>
+                    <li>Employment history</li>
+                    <li>Curriculum Vitae (CV)</li>
+                </ul>
+                
+                <h3>2. Use of Information</h3>
+                <p>Your information is used exclusively for:</p>
+                <ul>
+                    <li>Processing your job application</li>
+                    <li>Conducting background checks</li>
+                    <li>Communication regarding your application status</li>
+                    <li>Onboarding processes if selected</li>
+                </ul>
+                
+                <h3>3. Data Protection</h3>
+                <p>We implement strict security measures to protect your personal data from unauthorized access, alteration, or disclosure. All data is stored securely and accessed only by authorized personnel.</p>
+                
+                <h3>4. Data Retention</h3>
+                <p>Application data is retained for a period of 12 months for future opportunities. You may request deletion of your data at any time by contacting our HR department.</p>
+                
+                <h3>5. Third-Party Disclosure</h3>
+                <p>Quickmart does not sell, trade, or transfer your personal information to third parties except as required for background verification or legal compliance.</p>
+                
+                <h3>6. Your Rights</h3>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access your personal data</li>
+                    <li>Request corrections to your information</li>
+                    <li>Request deletion of your data</li>
+                    <li>Withdraw consent at any time</li>
+                </ul>
+                
+                <h3>7. Contact Us</h3>
+                <p>For privacy-related inquiries, contact us at: privacy@quickmart.co.ke</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         TERMS & CONDITIONS PAGE
+    =================================== -->
+    <div id="terms" class="page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Terms & Conditions</h2>
+                <p><strong>Effective Date: November 2025</strong></p>
+                
+                <h3>1. Application Eligibility</h3>
+                <p>By submitting an application, you confirm that:</p>
+                <ul>
+                    <li>You are a Kenyan citizen aged 18 years or above</li>
+                    <li>You possess a valid National ID</li>
+                    <li>All information provided is accurate and truthful</li>
+                    <li>You have the right to work in Kenya</li>
+                </ul>
+                
+                <h3>2. Application Process</h3>
+                <p>Applications are reviewed by our HR team. Shortlisted candidates will be contacted via SMS or email. Quickmart reserves the right to reject any application without providing reasons.</p>
+                
+                <h3>3. False Information</h3>
+                <p>Providing false or misleading information will result in immediate disqualification. If discovered after employment, it may lead to termination.</p>
+                
+                <h3>4. Interview Process</h3>
+                <p>Shortlisted candidates will undergo interviews and may be required to take assessments. Quickmart does not charge any fees for the application or interview process.</p>
+                
+                <h3>5. Employment Conditions</h3>
+                <p>Successful candidates will receive an official employment contract outlining:</p>
+                <ul>
+                    <li>Job responsibilities</li>
+                    <li>Compensation and benefits</li>
+                    <li>Working hours and location</li>
+                    <li>Code of conduct</li>
+                </ul>
+                
+                <h3>6. Probation Period</h3>
+                <p>New employees typically undergo a 3-month probation period during which performance is evaluated.</p>
+                
+                <h3>7. Intellectual Property</h3>
+                <p>All work products created during employment belong to Quickmart Kenya.</p>
+                
+                <h3>8. Modifications</h3>
+                <p>Quickmart reserves the right to modify these terms at any time. Continued application submission constitutes acceptance of updated terms.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         CONTACT US PAGE
+    =================================== -->
+    <div id="contact" class="page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Contact Us</h2>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>📧 Email</h4>
+                        <p>careers@quickmart.co.ke</p>
+                        <p>info@quickmart.co.ke</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>📞 Phone</h4>
+                        <p>+254 700 000 000</p>
+                        <p>+254 733 000 000</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🏢 Head Office</h4>
+                        <p>Quickmart Plaza, Nairobi</p>
+                        <p>P.O. Box 12345-00100</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>⏰ Working Hours</h4>
+                        <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                        <p>Saturday: 9:00 AM - 1:00 PM</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 2rem;">Send Us a Message</h3>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" placeholder="Message subject">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="5" placeholder="Your message..."></textarea>
+                </div>
+                <button class="btn btn-submit">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         COOKIE POLICY PAGE
+    =================================== -->
+    <div id="cookies" class="page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Cookie Policy</h2>
+                <p><strong>Last Updated: November 2025</strong></p>
+                
+                <h3>What Are Cookies?</h3>
+                <p>Cookies are small text files stored on your device when you visit our website. They help us provide a better user experience and understand how you interact with our site.</p>
+                
+                <h3>Types of Cookies We Use</h3>
+                
+                <h4>1. Essential Cookies</h4>
+                <p>These cookies are necessary for the website to function properly. They enable basic features like page navigation and access to secure areas.</p>
+                
+                <h4>2. Performance Cookies</h4>
+                <p>These cookies collect information about how visitors use our website, such as which pages are visited most often. This helps us improve our website performance.</p>
+                
+                <h4>3. Functionality Cookies</h4>
+                <p>These cookies allow our website to remember choices you make (such as your preferred language) and provide enhanced features.</p>
+                
+                <h4>4. Analytics Cookies</h4>
+                <p>We use analytics cookies to understand how users interact with our site, helping us improve user experience and content.</p>
+                
+                <h3>Managing Cookies</h3>
+                <p>Most web browsers allow you to control cookies through their settings. You can:</p>
+                <ul>
+                    <li>View what cookies are stored and delete them individually</li>
+                    <li>Block third-party cookies</li>
+                    <li>Block cookies from specific sites</li>
+                    <li>Block all cookies</li>
+                    <li>Delete all cookies when you close your browser</li>
+                </ul>
+                
+                <h3>Third-Party Cookies</h3>
+                <p>We may use third-party services (like Google Analytics) that also set cookies. These services help us analyze website traffic and improve our services.</p>
+                
+                <h3>Your Consent</h3>
+                <p>By using our website, you consent to our use of cookies in accordance with this policy. You can withdraw consent by adjusting your browser settings.</p>
+                
+                <h3>Updates to This Policy</h3>
+                <p>We may update this Cookie Policy from time to time. Please check this page regularly for updates.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         JOB APPLICATION PAGE
+    =================================== -->
+    <div id="job-application" class="page">
+        <div class="container">
+            <button class="back-button" onclick="goBack()">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Job Application Portal</h2>
+                <p>Join Kenya's fastest-growing supermarket chain. We're looking for dedicated, passionate individuals to join our team.</p>
+                
+                <div class="requirements-list">
+                    <h3>Qualifications Required</h3>
+                    <ul>
+                        <li>Must be a Kenyan citizen aged 18 years and above</li>
+                        <li>Must possess a valid National ID</li>
+                        <li>Excellent customer service skills</li>
+                        <li>Strong work ethic and discipline</li>
+                        <li>Ability to work as part of a team</li>
+                        <li>High school diploma or equivalent (KCSE/KCPE)</li>
+                        <li>Good communication skills</li>
+                        <li>Willingness to work flexible hours including weekends</li>
+                    </ul>
+                </div>
+                
+                <h3 style="margin-top: 2rem;">Application Process</h3>
+                <p>Our application process consists of 12 simple steps:</p>
+                <div class="positions-grid">
+                    <div class="info-card">
+                        <h4>Step 1-3</h4>
+                        <p>Application Form & Review</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Step 4-6</h4>
+                        <p>SMS & Interview Process</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Step 7-9</h4>
+                        <p>Additional Details & Positions</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Step 10-12</h4>
+                        <p>Verification & Confirmation</p>
+                    </div>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('step1')" style="margin-top: 2rem;">Start Application</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 1: APPLICATION FORM
+    =================================== -->
+    <div id="step1" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('job-application')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 1: Fill Application Form</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 8.33%"></div>
+                    </div>
+                    <p class="progress-text">Step 1 of 12</p>
+                </div>
+                
+                <form id="applicationForm">
+                    <div class="form-group">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" required>
+                        <div class="error-message" id="fullNameError">Please enter a valid name (letters only)</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phoneNumber" placeholder="07XXXXXXXX" required>
+                        <div class="error-message" id="phoneError">Please enter a valid Kenyan phone number (07XXXXXXXX)</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" required>
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>National ID Number <span class="required">*</span></label>
+                        <input type="text" id="nationalId" placeholder="12345678" required>
+                        <div class="error-message" id="nationalIdError">Please enter a valid 8-digit National ID</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Age <span class="required">*</span></label>
+                        <input type="number" id="age" min="18" max="100" required>
+                        <div class="error-message" id="ageError">You must be 18 years or older</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>County <span class="required">*</span></label>
+                        <select id="county" required>
+                            <option value="">Select County</option>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Mombasa">Mombasa</option>
+                            <option value="Kisumu">Kisumu</option>
+                            <option value="Nakuru">Nakuru</option>
+                            <option value="Kiambu">Kiambu</option>
+                            <option value="Machakos">Machakos</option>
+                            <option value="Kajiado">Kajiado</option>
+                            <option value="Uasin Gishu">Uasin Gishu</option>
+                            <option value="Nyeri">Nyeri</option>
+                            <option value="Meru">Meru</option>
+                            <option value="Kilifi">Kilifi</option>
+                            <option value="Kwale">Kwale</option>
+                            <option value="Murang'a">Murang'a</option>
+                            <option value="Nyandarua">Nyandarua</option>
+                            <option value="Kirinyaga">Kirinyaga</option>
+                            <option value="Embu">Embu</option>
+                            <option value="Tharaka Nithi">Tharaka Nithi</option>
+                            <option value="Kitui">Kitui</option>
+                            <option value="Makueni">Makueni</option>
+                            <option value="Nandi">Nandi</option>
+                            <option value="Baringo">Baringo</option>
+                            <option value="Laikipia">Laikipia</option>
+                            <option value="Samburu">Samburu</option>
+                            <option value="Trans Nzoia">Trans Nzoia</option>
+                            <option value="West Pokot">West Pokot</option>
+                            <option value="Elgeyo Marakwet">Elgeyo Marakwet</option>
+                            <option value="Turkana">Turkana</option>
+                            <option value="Bungoma">Bungoma</option>
+                            <option value="Busia">Busia</option>
+                            <option value="Kakamega">Kakamega</option>
+                            <option value="Vihiga">Vihiga</option>
+                            <option value="Siaya">Siaya</option>
+                            <option value="Migori">Migori</option>
+                            <option value="Homa Bay">Homa Bay</option>
+                            <option value="Kisii">Kisii</option>
+                            <option value="Nyamira">Nyamira</option>
+                            <option value="Bomet">Bomet</option>
+                            <option value="Kericho">Kericho</option>
+                            <option value="Narok">Narok</option>
+                            <option value="Garissa">Garissa</option>
+                            <option value="Wajir">Wajir</option>
+                            <option value="Mandera">Mandera</option>
+                            <option value="Marsabit">Marsabit</option>
+                            <option value="Isiolo">Isiolo</option>
+                            <option value="Taita Taveta">Taita Taveta</option>
+                            <option value="Lamu">Lamu</option>
+                            <option value="Tana River">Tana River</option>
+                        </select>
+                        <div class="error-message" id="countyError">Please select your county</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Town <span class="required">*</span></label>
+                        <input type="text" id="town" required>
+                        <div class="error-message" id="townError">Please enter your town</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Position Applying For <span class="required">*</span></label>
+                        <select id="position" required>
+                            <option value="">Select Position</option>
+                            <option value="Cashier">Cashier</option>
+                            <option value="Sales Assistant">Sales Assistant</option>
+                            <option value="Stock Controller">Stock Controller</option>
+                            <option value="Supervisor">Supervisor</option>
+                            <option value="Customer Service Representative">Customer Service Representative</option>
+                            <option value="Security Officer">Security Officer</option>
+                            <option value="Cleaner">Cleaner</option>
+                            <option value="Butchery Attendant">Butchery Attendant</option>
+                            <option value="Baker">Baker</option>
+                            <option value="Delivery Driver">Delivery Driver</option>
+                        </select>
+                        <div class="error-message" id="positionError">Please select a position</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Education Level <span class="required">*</span></label>
+                        <select id="education" required>
+                            <option value="">Select Education Level</option>
+                            <option value="KCPE">KCPE</option>
+                            <option value="KCSE">KCSE (O-Level)</option>
+                            <option value="Certificate">Certificate</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="Degree">Bachelor's Degree</option>
+                            <option value="Masters">Master's Degree</option>
+                        </select>
+                        <div class="error-message" id="educationError">Please select your education level</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Upload CV (PDF only) <span class="required">*</span></label>
+                        <input type="file" id="cv" accept=".pdf" required>
+                        <div class="error-message" id="cvError">Please upload your CV in PDF format</div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="btn btn-prev" onclick="navigateTo('job-application')">Previous</button>
+                        <button type="button" class="btn btn-next" id="nextStep1" disabled onclick="proceedToStep2()">Next Step</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 2: REVIEW DETAILS
+    =================================== -->
+    <div id="step2" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step1')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 2: Review Your Details</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 16.66%"></div>
+                    </div>
+                    <p class="progress-text">Step 2 of 12</p>
+                </div>
+                
+                <p>Please review your information carefully before submitting:</p>
+                
+                <div id="reviewDetails" style="margin-top: 2rem;"></div>
+                
+                <div class="button-group">
+                    <button class="btn btn-prev" onclick="navigateTo('step1')">Edit Details</button>
+                    <button class="btn btn-next" onclick="navigateTo('step3')">Confirm & Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 3: SUBMIT APPLICATION
+    =================================== -->
+    <div id="step3" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step2')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 3: Submit Application</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 25%"></div>
+                    </div>
+                    <p class="progress-text">Step 3 of 12</p>
+                </div>
+                
+                <p>You are about to submit your application to Quickmart Kenya. By clicking "Submit Application", you confirm that:</p>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="confirmAccuracy">
+                        <span>All information provided is accurate and truthful</span>
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="confirmAge">
+                        <span>I am 18 years of age or older</span>
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="confirmTerms">
+                        <span>I have read and agree to the Terms & Conditions</span>
+                    </label>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-prev" onclick="navigateTo('step2')">Previous</button>
+                    <button class="btn btn-submit" id="submitBtn" disabled onclick="submitApplication()">Submit Application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 4: ACCEPTANCE SMS
+    =================================== -->
+    <div id="step4" class="page">
+        <div class="container">
+            <div class="card">
+                <h2>Step 4: Application Received</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 33.33%"></div>
+                    </div>
+                    <p class="progress-text">Step 4 of 12</p>
+                </div>
+                
+                <div class="success-icon">✓</div>
+                
+                <p style="text-align: center; font-size: 1.1rem; margin: 2rem 0;">
+                    Your application has been submitted successfully!
+                </p>
+                
+                <div class="info-card" style="background-color: #e8f5e9;">
+                    <h4>📱 What Happens Next?</h4>
+                    <p>You will receive an SMS notification on <strong id="applicantPhone"></strong> if you are shortlisted for an interview.</p>
+                    <p style="margin-top: 1rem;">Our HR team reviews all applications within 5-7 business days.</p>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('step5')" style="margin-top: 2rem; width: 100%;">Continue to Next Step</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 5: BRIEF INTERVIEW
+    =================================== -->
+    <div id="step5" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step4')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 5: Interview Process</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 41.66%"></div>
+                    </div>
+                    <p class="progress-text">Step 5 of 12</p>
+                </div>
+                
+                <h3>Interview Information</h3>
+                <p>If shortlisted, you will be invited for a brief interview. Here's what to expect:</p>
+                
+                <div class="info-grid" style="margin-top: 2rem;">
+                    <div class="info-card">
+                        <h4>📍 Location</h4>
+                        <p>Interviews are conducted at our nearest branch to your location</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>⏱️ Duration</h4>
+                        <p>Approximately 15-30 minutes</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>📋 Format</h4>
+                        <p>One-on-one with HR representative</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>📄 Requirements</h4>
+                        <p>Bring your National ID and original certificates</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 2rem;">Interview Preparation Tips</h3>
+                <ul>
+                    <li>Dress professionally and arrive 15 minutes early</li>
+                    <li>Bring copies of your CV and certificates</li>
+                    <li>Research about Quickmart and our values</li>
+                    <li>Prepare to discuss your customer service experience</li>
+                    <li>Be honest and confident in your responses</li>
+                </ul>
+                
+                <button class="btn btn-next" onclick="navigateTo('step6')" style="margin-top: 2rem;">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 6: CONFIRM BRANCH
+    =================================== -->
+    <div id="step6" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step5')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 6: Preferred Branch Location</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%"></div>
+                    </div>
+                    <p class="progress-text">Step 6 of 12</p>
+                </div>
+                
+                <p>Select your preferred branch locations (you can select up to 3):</p>
+                
+                <div class="form-group">
+                    <label>Primary Branch Preference <span class="required">*</span></label>
+                    <select id="branch1">
+                        <option value="">Select Branch</option>
+                        <option value="Nairobi CBD">Quickmart Nairobi CBD</option>
+                        <option value="Westlands">Quickmart Westlands</option>
+                        <option value="Thika">Quickmart Thika</option>
+                        <option value="Nakuru">Quickmart Nakuru</option>
+                        <option value="Eldoret">Quickmart Eldoret</option>
+                        <option value="Kisumu">Quickmart Kisumu</option>
+                        <option value="Mombasa">Quickmart Mombasa</option>
+                        <option value="Kitengela">Quickmart Kitengela</option>
+                        <option value="Rongai">Quickmart Rongai</option>
+                        <option value="Nyeri">Quickmart Nyeri</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Secondary Branch Preference (Optional)</label>
+                    <select id="branch2">
+                        <option value="">Select Branch</option>
+                        <option value="Nairobi CBD">Quickmart Nairobi CBD</option>
+                        <option value="Westlands">Quickmart Westlands</option>
+                        <option value="Thika">Quickmart Thika</option>
+                        <option value="Nakuru">Quickmart Nakuru</option>
+                        <option value="Eldoret">Quickmart Eldoret</option>
+                        <option value="Kisumu">Quickmart Kisumu</option>
+                        <option value="Mombasa">Quickmart Mombasa</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Tertiary Branch Preference (Optional)</label>
+                    <select id="branch3">
+                        <option value="">Select Branch</option>
+                        <option value="Nairobi CBD">Quickmart Nairobi CBD</option>
+                        <option value="Westlands">Quickmart Westlands</option>
+                        <option value="Thika">Quickmart Thika</option>
+                        <option value="Nakuru">Quickmart Nakuru</option>
+                        <option value="Eldoret">Quickmart Eldoret</option>
+                    </select>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="willingRelocate">
+                        <span>I am willing to relocate to any branch if necessary</span>
+                    </label>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('step7')" style="margin-top: 2rem;">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 7: ADDITIONAL INFORMATION
+    =================================== -->
+    <div id="step7" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step6')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 7: Additional Information</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 58.33%"></div>
+                    </div>
+                    <p class="progress-text">Step 7 of 12</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Do you have previous retail experience? <span class="required">*</span></label>
+                    <select id="retailExperience">
+                        <option value="">Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>If yes, how many years?</label>
+                    <input type="number" id="yearsExperience" min="0" max="50" placeholder="Enter years of experience">
+                </div>
+                
+                <div class="form-group">
+                    <label>Previous employer (if any)</label>
+                    <input type="text" id="previousEmployer" placeholder="Company name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Do you have any special skills? (e.g., computer literacy, languages)</label>
+                    <textarea id="specialSkills" rows="4" placeholder="Describe your special skills..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Why do you want to work at Quickmart?</label>
+                    <textarea id="whyQuickmart" rows="4" placeholder="Tell us why you want to join our team..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Are you available to work on weekends and holidays? <span class="required">*</span></label>
+                    <select id="weekendAvailability">
+                        <option value="">Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Sometimes">Sometimes</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('step8')" style="margin-top: 2rem;">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 8: REVIEW JOB POSITIONS
+    =================================== -->
+    <div id="step8" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step7')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 8: Available Positions Overview</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 66.66%"></div>
+                    </div>
+                    <p class="progress-text">Step 8 of 12</p>
+                </div>
+                
+                <p>Review the responsibilities for various positions at Quickmart:</p>
+                
+                <div class="positions-grid" style="margin-top: 2rem;">
+                    <div class="info-card">
+                        <h4>Cashier</h4>
+                        <p>Handle customer transactions, process payments, maintain cash register accuracy</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Sales Assistant</h4>
+                        <p>Assist customers, stock shelves, maintain product displays, ensure store cleanliness</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Stock Controller</h4>
+                        <p>Manage inventory, receive deliveries, track stock levels, prevent losses</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Supervisor</h4>
+                        <p>Lead team members, ensure operational efficiency, handle customer complaints</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Customer Service</h4>
+                        <p>Address customer inquiries, resolve issues, provide excellent service experience</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Security Officer</h4>
+                        <p>Ensure store safety, monitor CCTV, prevent theft, maintain security protocols</p>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group" style="margin-top: 2rem;">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="understandRoles">
+                        <span>I understand the responsibilities of my selected position</span>
+                    </label>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('step9')" style="margin-top: 2rem;">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 9: AGREE TO TERMS
+    =================================== -->
+    <div id="step9" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step8')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 9: Employment Terms Agreement</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p class="progress-text">Step 9 of 12</p>
+                </div>
+                
+                <h3>Employment Conditions</h3>
+                <p>Please review and accept the following employment terms:</p>
+                
+                <div class="requirements-list">
+                    <h4>Key Terms:</h4>
+                    <ul>
+                        <li>3-month probationary period for all new employees</li>
+                        <li>Flexible working hours including weekends and public holidays</li>
+                        <li>Competitive salary based on position and experience</li>
+                        <li>NHIF and NSSF statutory deductions as per Kenyan law</li>
+                        <li>Annual leave of 21 days as per Employment Act</li>
+                        <li>Performance-based bonuses and incentives</li>
+                        <li>Training and development opportunities</li>
+                        <li>Adherence to company code of conduct and ethics</li>
+                    </ul>
+                </div>
+                
+                <div class="checkbox-group" style="margin-top: 2rem;">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeEmploymentTerms">
+                        <span>I have read and agree to the employment terms and conditions</span>
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeCodeConduct">
+                        <span>I agree to abide by Quickmart's code of conduct and ethics</span>
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consentBackground">
+                        <span>I consent to background verification checks</span>
+                    </label>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('step10')" style="margin-top: 2rem;">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 10: FINAL VERIFICATION
+    =================================== -->
+    <div id="step10" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step9')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 10: Identity Verification</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 83.33%"></div>
+                    </div>
+                    <p class="progress-text">Step 10 of 12</p>
+                </div>
+                
+                <p>Final verification step to confirm your identity:</p>
+                
+                <div class="form-group">
+                    <label>Confirm Your National ID Number <span class="required">*</span></label>
+                    <input type="text" id="confirmNationalId" placeholder="Re-enter your National ID">
+                </div>
+                
+                <div class="form-group">
+                    <label>Emergency Contact Name <span class="required">*</span></label>
+                    <input type="text" id="emergencyName" placeholder="Full name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Emergency Contact Phone <span class="required">*</span></label>
+                    <input type="tel" id="emergencyPhone" placeholder="07XXXXXXXX">
+                </div>
+                
+                <div class="form-group">
+                    <label>Relationship to Emergency Contact <span class="required">*</span></label>
+                    <select id="emergencyRelationship">
+                        <option value="">Select</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Spouse">Spouse</option>
+                        <option value="Sibling">Sibling</option>
+                        <option value="Guardian">Guardian</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="info-card" style="background-color: #fff3cd; margin-top: 2rem;">
+                    <h4>⚠️ Important</h4>
+                    <p>Ensure all information is accurate. Any discrepancies may lead to disqualification.</p>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('step11')" style="margin-top: 2rem;">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 11: TRAINING PREPARATION
+    =================================== -->
+    <div id="step11" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step10')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 11: Training & Onboarding</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 91.66%"></div>
+                    </div>
+                    <p class="progress-text">Step 11 of 12</p>
+                </div>
+                
+                <h3>What to Expect During Training</h3>
+                <p>If you are successful, you will undergo comprehensive training before starting work:</p>
+                
+                <div class="info-grid" style="margin-top: 2rem;">
+                    <div class="info-card">
+                        <h4>📚 Orientation</h4>
+                        <p>Introduction to Quickmart culture, values, and policies</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🎯 Job-Specific Training</h4>
+                        <p>Hands-on training for your specific role and responsibilities</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>👥 Customer Service</h4>
+                        <p>Excellence in customer interaction and service delivery</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🔒 Safety & Security</h4>
+                        <p>Workplace safety protocols and security procedures</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 2rem;">Training Schedule</h3>
+                <ul>
+                    <li>Duration: 1-2 weeks depending on position</li>
+                    <li>Location: Your assigned branch</li>
+                    <li>Timing: Full-time during training period</li>
+                    <li>Compensation: Training allowance provided</li>
+                </ul>
+                
+                <div class="form-group" style="margin-top: 2rem;">
+                    <label>Preferred Training Start Date</label>
+                    <input type="date" id="trainingStartDate">
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="commitTraining">
+                        <span>I commit to attending all training sessions</span>
+                    </label>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('step12')" style="margin-top: 2rem;">Continue to Final Step</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STEP 12: OFFICIAL START CONFIRMATION
+    =================================== -->
+    <div id="step12" class="page">
+        <div class="container">
+            <button class="back-button" onclick="navigateTo('step11')">
+                <span class="back-arrow">←</span> Back
+            </button>
+            
+            <div class="card">
+                <h2>Step 12: Application Complete</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <p class="progress-text">Step 12 of 12 - Complete!</p>
+                </div>
+                
+                <div class="success-icon">🎉</div>
+                
+                <h3 style="text-align: center; color: var(--quickmart-green);">Congratulations!</h3>
+                <p style="text-align: center; font-size: 1.1rem;">You have successfully completed all application steps.</p>
+                
+                <div class="info-card" style="background-color: #e8f5e9; margin-top: 2rem;">
+                    <h4>📋 Application Summary</h4>
+                    <p><strong>Application ID:</strong> QM-<span id="applicationId"></span></p>
+                    <p><strong>Date Submitted:</strong> <span id="submissionDate"></span></p>
+                    <p><strong>Position:</strong> <span id="appliedPosition"></span></p>
+                    <p><strong>Status:</strong> <span style="color: var(--quickmart-green); font-weight: bold;">Under Review</span></p>
+                </div>
+                
+                <h3 style="margin-top: 2rem;">What Happens Next?</h3>
+                <div class="step-indicators" style="margin-top: 1rem;">
+                    <div class="step completed">Application Received</div>
+                    <div class="step active">HR Review (5-7 days)</div>
+                    <div class="step">Shortlisting</div>
+                    <div class="step">Interview Invitation</div>
+                    <div class="step">Final Decision</div>
+                </div>
+                
+                <div class="requirements-list" style="margin-top: 2rem;">
+                    <h4>Important Reminders:</h4>
+                    <ul>
+                        <li>Keep your phone accessible for SMS notifications</li>
+                        <li>Check your email regularly for updates</li>
+                        <li>Prepare your original documents for the interview</li>
+                        <li>Follow up after 7 days if you haven't heard from us</li>
+                        <li>Beware of scams - Quickmart will never ask for payment</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card" style="margin-top: 2rem;">
+                    <h4>📞 Need Help?</h4>
+                    <p>Contact HR: careers@quickmart.co.ke | +254 700 000 000</p>
+                </div>
+                
+                <button class="btn btn-next" onclick="navigateTo('home')" style="margin-top: 2rem; width: 100%;">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         SUCCESS MODAL
+    =================================== -->
+    <div id="successModal" class="success-modal">
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h2>Application Submitted Successfully!</h2>
+            <p>You will receive an SMS if you are shortlisted for an interview.</p>
+            <p>Our HR team will review your application within 5-7 business days.</p>
+            <button class="btn btn-primary" onclick="closeSuccessModal()">Continue Application Process</button>
+        </div>
+    </div>
+
+    <!-- ===================================
+         FOOTER
+    =================================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a onclick="navigateTo('home')">Home</a>
+                <a onclick="navigateTo('about')">About Us</a>
+                <a onclick="navigateTo('privacy')">Privacy Policy</a>
+                <a onclick="navigateTo('terms')">Terms & Conditions</a>
+                <a onclick="navigateTo('contact')">Contact</a>
+                <a onclick="navigateTo('cookies')">Cookie Policy</a>
+            </div>
+            <p style="margin-top: 1rem;">&copy; 2025 Quickmart Kenya. All rights reserved.</p>
+            <p>Building Careers. Serving Communities.</p>
+        </div>
+    </footer>
+
+    <!-- ===================================
+         JAVASCRIPT
+    =================================== -->
+    <script>
+        // ===================================
+        // NAVIGATION & PAGE MANAGEMENT
+        // ===================================
+        
+        let pageHistory = ['home'];
+        let formData = {};
+
+        function navigateTo(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                pageHistory.push(pageId);
+                window.scrollTo(0, 0);
+                
+                // Close mobile menu if open
+                const navMenu = document.getElementById('navMenu');
+                navMenu.classList.remove('active');
+            }
+        }
+
+        function goBack() {
+            if (pageHistory.length > 1) {
+                pageHistory.pop(); // Remove current page
+                const previousPage = pageHistory[pageHistory.length - 1];
+                
+                const pages = document.querySelectorAll('.page');
+                pages.forEach(page => page.classList.remove('active'));
+                
+                const targetPage = document.getElementById(previousPage);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    window.scrollTo(0, 0);
+                }
+            }
+        }
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // ===================================
+        // FORM VALIDATION
+        // ===================================
+
+        // Real-time validation for Full Name
+        document.addEventListener('DOMContentLoaded', function() {
+            const fullName = document.getElementById('fullName');
+            if (fullName) {
+                fullName.addEventListener('input', function() {
+                    const nameRegex = /^[a-zA-Z\s]+$/;
+                    const errorMsg = document.getElementById('fullNameError');
+                    
+                    if (this.value.length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        errorMsg.classList.remove('show');
+                    } else if (nameRegex.test(this.value) && this.value.length >= 3) {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        errorMsg.classList.remove('show');
+                    } else {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        errorMsg.classList.add('show');
+                    }
+                    
+                    checkFormValidity();
+                });
+            }
+
+            // Real-time validation for Phone Number
+            const phoneNumber = document.getElementById('phoneNumber');
+            if (phoneNumber) {
+                phoneNumber.addEventListener('input', function() {
+                    const phoneRegex = /^07[0-9]{8}$/;
+                    const errorMsg = document.getElementById('phoneError');
+                    
+                    if (this.value.length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        errorMsg.classList.remove('show');
+                    } else if (phoneRegex.test(this.value)) {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        errorMsg.classList.remove('show');
+                    } else {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        errorMsg.classList.add('show');
+                    }
+                    
+                    checkFormValidity();
+                });
+            }
+
+            // Real-time validation for Email
+            const email = document.getElementById('email');
+            if (email) {
+                email.addEventListener('input', function() {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    const errorMsg = document.getElementById('emailError');
+                    
+                    if (this.value.length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        errorMsg.classList.remove('show');
+                    } else if (emailRegex.test(this.value)) {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        errorMsg.classList.remove('show');
+                    } else {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        errorMsg.classList.add('show');
+                    }
+                    
+                    checkFormValidity();
+                });
+            }
+
+            // Real-time validation for National ID
+            const nationalId = document.getElementById('nationalId');
+            if (nationalId) {
+                nationalId.addEventListener('input', function() {
+                    const idRegex = /^[0-9]{8}$/;
+                    const errorMsg = document.getElementById('nationalIdError');
+                    
+                    if (this.value.length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        errorMsg.classList.remove('show');
+                    } else if (idRegex.test(this.value)) {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        errorMsg.classList.remove('show');
+                    } else {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        errorMsg.classList.add('show');
+                    }
+                    
+                    checkFormValidity();
+                });
+            }
+
+            // Real-time validation for Age
+            const age = document.getElementById('age');
+            if (age) {
+                age.addEventListener('input', function() {
+                    const errorMsg = document.getElementById('ageError');
+                    
+                    if (this.value.length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        errorMsg.classList.remove('show');
+                    } else if (parseInt(this.value) >= 18) {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        errorMsg.classList.remove('show');
+                    } else {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        errorMsg.classList.add('show');
+                    }
+                    
+                    checkFormValidity();
+                });
+            }
+
+            // Validation for County
+            const county = document.getElementById('county');
+            if (county) {
+                county.addEventListener('change', function() {
+                    checkFormValidity();
+                });
+            }
+
+            // Validation for Town
+            const town = document.getElementById('town');
+            if (town) {
+                town.addEventListener('input', function() {
+                    checkFormValidity();
+                });
+            }
+
+            // Validation for Position
+            const position = document.getElementById('position');
+            if (position) {
+                position.addEventListener('change', function() {
+                    checkFormValidity();
+                });
+            }
+
+            // Validation for Education
+            const education = document.getElementById('education');
+            if (education) {
+                education.addEventListener('change', function() {
+                    checkFormValidity();
+                });
+            }
+
+            // Validation for CV Upload
+            const cv = document.getElementById('cv');
+            if (cv) {
+                cv.addEventListener('change', function() {
+                    const errorMsg = document.getElementById('cvError');
+                    
+                    if (this.files.length > 0) {
+                        const file = this.files[0];
+                        if (file.type === 'application/pdf') {
+                            this.classList.add('valid');
+                            this.classList.remove('invalid');
+                            errorMsg.classList.remove('show');
+                        } else {
+                            this.classList.add('invalid');
+                            this.classList.remove('valid');
+                            errorMsg.classList.add('show');
+                        }
+                    }
+                    
+                    checkFormValidity();
+                });
+            }
+
+            // Step 3 checkboxes
+            const confirmAccuracy = document.getElementById('confirmAccuracy');
+            const confirmAge = document.getElementById('confirmAge');
+            const confirmTerms = document.getElementById('confirmTerms');
+            
+            if (confirmAccuracy && confirmAge && confirmTerms) {
+                [confirmAccuracy, confirmAge, confirmTerms].forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const submitBtn = document.getElementById('submitBtn');
+                        if (confirmAccuracy.checked && confirmAge.checked && confirmTerms.checked) {
+                            submitBtn.disabled = false;
+                        } else {
+                            submitBtn.disabled = true;
+                        }
+                    });
+                });
+            }
+        });
+
+        function checkFormValidity() {
+            const fullName = document.getElementById('fullName');
+            const phoneNumber = document.getElementById('phoneNumber');
+            const email = document.getElementById('email');
+            const nationalId = document.getElementById('nationalId');
+            const age = document.getElementById('age');
+            const county = document.getElementById('county');
+            const town = document.getElementById('town');
+            const position = document.getElementById('position');
+            const education = document.getElementById('education');
+            const cv = document.getElementById('cv');
+            const nextBtn = document.getElementById('nextStep1');
+
+            const nameValid = fullName.classList.contains('valid');
+            const phoneValid = phoneNumber.classList.contains('valid');
+            const emailValid = email.classList.contains('valid');
+            const idValid = nationalId.classList.contains('valid');
+            const ageValid = age.classList.contains('valid');
+            const countyValid = county.value !== '';
+            const townValid = town.value.trim() !== '';
+            const positionValid = position.value !== '';
+            const educationValid = education.value !== '';
+            const cvValid = cv.files.length > 0 && cv.files[0].type === 'application/pdf';
+
+            if (nameValid && phoneValid && emailValid && idValid && ageValid && 
+                countyValid && townValid && positionValid && educationValid && cvValid) {
+                nextBtn.disabled = false;
+            } else {
+                nextBtn.disabled = true;
+            }
+        }
+
+        // ===================================
+        // PROCEED TO STEP 2
+        // ===================================
+        function proceedToStep2() {
+            // Save form data
+            formData = {
+                fullName: document.getElementById('fullName').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                email: document.getElementById('email').value,
+                nationalId: document.getElementById('nationalId').value,
+                age: document.getElementById('age').value,
+                county: document.getElementById('county').value,
+                town: document.getElementById('town').value,
+                position: document.getElementById('position').value,
+                education: document.getElementById('education').value,
+                cv: document.getElementById('cv').files[0].name
+            };
+
+            // Display review details
+            const reviewDetails = document.getElementById('reviewDetails');
+            reviewDetails.innerHTML = `
+                <div class="review-item">
+                    <span class="review-label">Full Name:</span>
+                    <span class="review-value">${formData.fullName}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">Phone Number:</span>
+                    <span class="review-value">${formData.phoneNumber}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">Email:</span>
+                    <span class="review-value">${formData.email}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">National ID:</span>
+                    <span class="review-value">${formData.nationalId}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">Age:</span>
+                    <span class="review-value">${formData.age} years</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">County:</span>
+                    <span class="review-value">${formData.county}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">Town:</span>
+                    <span class="review-value">${formData.town}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">Position:</span>
+                    <span class="review-value">${formData.position}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">Education:</span>
+                    <span class="review-value">${formData.education}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">CV:</span>
+                    <span class="review-value">${formData.cv}</span>
+                </div>
+            `;
+
+            navigateTo('step2');
+        }
+
+        // ===================================
+        // SUBMIT APPLICATION
+        // ===================================
+        function submitApplication() {
+            // Show success modal
+            const modal = document.getElementById('successModal');
+            modal.classList.add('show');
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('show');
+            
+            // Update step 4 with phone number
+            document.getElementById('applicantPhone').textContent = formData.phoneNumber;
+            
+            // Navigate to step 4
+            navigateTo('step4');
+        }
+
+        // ===================================
+        // GENERATE APPLICATION ID
+        // ===================================
+        function generateApplicationId() {
+            return Math.floor(100000 + Math.random() * 900000);
+        }
+
+        function getCurrentDate() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        // Update Step 12 when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const appId = document.getElementById('applicationId');
+                const submissionDate = document.getElementById('submissionDate');
+                const appliedPosition = document.getElementById('appliedPosition');
+                
+                if (appId) {
+                    appId.textContent = generateApplicationId();
+                }
+                if (submissionDate) {
+                    submissionDate.textContent = getCurrentDate();
+                }
+                if (appliedPosition && formData.position) {
+                    appliedPosition.textContent = formData.position;
+                }
+            }, 100);
+        });
+
+        // ===================================
+        // CLOSE MOBILE MENU ON LINK CLICK
+        // ===================================
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!navMenu.contains(event.target) && !hamburger.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+      </html>
