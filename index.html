@@ -548,6 +548,89 @@
             font-size: 16px;
         }
 
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 3000;
+            min-width: 300px;
+            max-width: 400px;
+            display: none;
+            animation: slideInRight 0.3s ease;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        .notification.success {
+            border-left: 5px solid var(--quickmart-green);
+        }
+
+        .notification.error {
+            border-left: 5px solid var(--quickmart-red);
+        }
+
+        .notification.info {
+            border-left: 5px solid #2196f3;
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .notification.success .notification-title {
+            color: var(--quickmart-green);
+        }
+
+        .notification.error .notification-title {
+            color: var(--quickmart-red);
+        }
+
+        .notification.info .notification-title {
+            color: #2196f3;
+        }
+
+        .notification-close {
+            cursor: pointer;
+            font-size: 24px;
+            color: #999;
+            line-height: 1;
+        }
+
+        .notification-close:hover {
+            color: #333;
+        }
+
+        .notification-message {
+            color: var(--text-dark);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         @media (max-width: 768px) {
             .desktop-menu {
                 display: none;
@@ -581,6 +664,14 @@
                 width: 30px;
                 height: 30px;
                 font-size: 14px;
+            }
+
+            .notification {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+                max-width: none;
             }
         }
     </style>
@@ -1365,6 +1456,14 @@
         </div>
     </div>
 
+    <div id="notification" class="notification">
+        <div class="notification-header">
+            <div class="notification-title" id="notificationTitle">Notification</div>
+            <div class="notification-close" onclick="closeNotification()">&times;</div>
+        </div>
+        <div class="notification-message" id="notificationMessage"></div>
+    </div>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -1417,6 +1516,58 @@
             interviewBranch: ''
         };
 
+        function showNotification(title, message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const notificationTitle = document.getElementById('notificationTitle');
+            const notificationMessage = document.getElementById('notificationMessage');
+
+            notification.className = 'notification show ' + type;
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+
+            setTimeout(() => {
+                closeNotification();
+            }, 5000);
+        }
+
+        function closeNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+        }
+
+        function saveApplicationData() {
+            const applicationData = {
+                ...formData,
+                cvFileName: formData.cvFile ? formData.cvFile.name : null,
+                appliedDate: new Date().toISOString(),
+                status: 'submitted'
+            };
+            localStorage.setItem('quickmart_application', JSON.stringify(applicationData));
+        }
+
+        function loadApplicationData() {
+            const saved = localStorage.getItem('quickmart_application');
+            if (saved) {
+                const data = JSON.parse(saved);
+                formData.fullName = data.fullName;
+                formData.phone = data.phone;
+                formData.email = data.email;
+                formData.nationalId = data.nationalId;
+                formData.age = data.age;
+                formData.county = data.county;
+                formData.town = data.town;
+                formData.position = data.position;
+                formData.education = data.education;
+                formData.interviewBranch = data.interviewBranch;
+                return true;
+            }
+            return false;
+        }
+
+        function hasAppliedBefore() {
+            return localStorage.getItem('quickmart_application') !== null;
+        }
+
         function navigateTo(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
@@ -1431,15 +1582,33 @@
         }
 
         function startApplication() {
-            navigateTo('step1');
+            if (hasAppliedBefore()) {
+                loadApplicationData();
+                updateReviewPage();
+                navigateTo('step8');
+                showNotification('Application Found', 'You have already submitted an application. Review your information below.', 'info');
+            } else {
+                navigateTo('step1');
+            }
         }
 
         function nextStep(currentStep) {
+            saveProgress();
             navigateTo('step' + (currentStep + 1));
         }
 
         function previousStep(currentStep) {
             navigateTo('step' + (currentStep - 1));
+        }
+
+        function saveProgress() {
+            const progressData = {
+                ...formData,
+                cvFileName: formData.cvFile ? formData.cvFile.name : null,
+                lastUpdated: new Date().toISOString(),
+                status: 'in_progress'
+            };
+            localStorage.setItem('quickmart_application_progress', JSON.stringify(progressData));
         }
 
         function validateName(name) {
@@ -1778,7 +1947,7 @@
             document.getElementById('loadingModal').classList.add('active');
 
             try {
-                const response = await fetch('https://backend-douu.onrender.com', {
+                const response = await fetch('https://backend-douu.onrender.com/pay', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1786,7 +1955,7 @@
                     body: JSON.stringify({
                         phone: formData.phone,
                         amount: 150,
-                        reference: 'QUICKMART-' + Date.now()
+                        loan_amount: 0
                     })
                 });
 
@@ -1794,17 +1963,20 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    if (data.success || response.status === 200) {
+                    if (data.success) {
+                        saveApplicationData();
                         showPaymentSuccess();
+                        showNotification('Success', data.message || 'STK push sent to your phone', 'success');
                     } else {
-                        showPaymentError();
+                        showPaymentError(data.error || 'Payment initiation failed');
                     }
                 } else {
-                    showPaymentError();
+                    const errorData = await response.json().catch(() => ({}));
+                    showPaymentError(errorData.error || 'Payment request failed');
                 }
             } catch (error) {
                 document.getElementById('loadingModal').classList.remove('active');
-                showPaymentError();
+                showPaymentError('Network error. Please check your connection and try again.');
             }
         }
 
@@ -1813,8 +1985,8 @@
             navigateTo('payment-success');
         }
 
-        function showPaymentError() {
-            alert('Payment failed. Please try again or contact support if the problem persists.\n\nError: Unable to process M-Pesa payment.');
+        function showPaymentError(message) {
+            showNotification('Payment Failed', message || 'Unable to process M-Pesa payment. Please try again or contact support if the problem persists.', 'error');
         }
     </script>
 
